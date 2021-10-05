@@ -12,7 +12,7 @@
       </span>
       </p>
       <p class="control">
-        <button type="button" class="button" @click="$emit('update:modelValue', '')">
+        <button type="button" :disabled="!modelValue.length" :class="{'button': 1, 'has-background-dark': darkMode, 'has-text-white': darkMode}" @click="$emit('update:modelValue', '')">
           <span class="icon">
             <i class="fas fa-times"></i>
           </span>
