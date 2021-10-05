@@ -3,7 +3,7 @@
     <div class="column is-full field p-0 has-addons">
       <p class="control is-expanded has-icons-left">
         <input
-            class="input" type="text" placeholder="Szukaj"
+            :class="{'input': true, 'has-background-dark': darkMode, 'has-text-white': darkMode}" type="text" placeholder="Szukaj"
             :value="modelValue"
             @input="$emit('update:modelValue', $event.target.value)"
         >
@@ -23,13 +23,21 @@
 </template>
 
 <script>
+import {inject} from 'vue';
+
 export default {
   props: {
     modelValue: {
       type: String,
     }
   },
-  emits: ['update:modelValue']
+  emits: ['update:modelValue'],
+  setup() {
+    const darkMode = inject('darkMode');
+    return {
+      darkMode
+    }
+  }
 }
 </script>
 

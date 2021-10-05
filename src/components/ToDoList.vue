@@ -1,11 +1,11 @@
 <template>
   <nav class="panel">
-    <p class="panel-heading has-text-centered">
+    <p :class="{'panel-heading': 1, 'has-text-centered': 1, 'has-background-dark': darkMode, 'has-text-white': darkMode}">
       DO ZROBIENIA
     </p>
     <to-do-options v-model:hide-done="hideDone" :done-count="doneCount"/>
     <to-do-search-form v-model="searchText"/>
-    <div class="panel-block" v-if="!todos.length">
+    <div :class="{'panel-block': 1, 'has-text-white': darkMode}" v-if="!todos.length">
       <span v-if="!searchText.length">Ta lista jest pusta. Nie masz przypadkiem czegoś do zrobienia? Wpisz to pod spodem i naciśnij Enter.</span>
       <span v-else>Nic nie znaleziono.</span>
     </div>
@@ -21,7 +21,7 @@
 
 <script>
 import useToDoRepository from '@/composables/useToDoRepository.js';
-import {ref, computed} from 'vue';
+import {ref, computed, inject} from 'vue';
 import ToDoSearchForm from '@/components/ToDoSearchForm.vue';
 import ToDoItem from '@/components/ToDoItem.vue';
 import ToDoCreateForm from '@/components/ToDoCreateForm.vue';
@@ -36,6 +36,7 @@ export default {
     const optionsRepository = useOptionsRepository();
     const todos = ref(toDoRepository.getAll());
     const hideDone = ref(optionsRepository.shouldHideDone());
+    const darkMode = inject('darkMode');
 
     const applyHideDone = (items) => {
       if (hideDone.value) {
@@ -92,6 +93,7 @@ export default {
       searchText,
       hideDone,
       doneCount,
+      darkMode,
       handleCreate,
       handleUpdate,
       handleDelete,
