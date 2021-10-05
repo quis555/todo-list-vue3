@@ -15,9 +15,6 @@ export default {
     const {darkMode, toggleDarkMode} = useDarkMode();
     provide('darkMode', darkMode);
     provide('toggleDarkMode', toggleDarkMode);
-    return {
-      darkMode
-    }
   }
 }
 </script>
